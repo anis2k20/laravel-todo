@@ -12,7 +12,14 @@
             <button>
             <a href="{{route('todos.edit', $todo->id)}}">Edit</a>    
             </button>
-            <button>Delete</button>
+            
+                <form action="{{ route('todos.destroy', $todo->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?')">Delete</button>
+                </form>
+                
+            
         </div>
     </li>
     @endforeach
