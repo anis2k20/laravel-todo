@@ -1,3 +1,5 @@
+<x-app-layout>
+
 <div style="width: 400px; margin: 0 auto; border: 1px solid black; padding: 10px;">
     <h2>Todo List</h2>
     <a href="{{ route('todos.create') }}">+ Add Todo</a>
@@ -12,16 +14,14 @@
             <button>
             <a href="{{route('todos.edit', $todo->id)}}">Edit</a>    
             </button>
-            
-                <form action="{{ route('todos.destroy', $todo->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?')">Delete</button>
-                </form>
-                
-            
+            <form action="{{ route('todos.destroy', $todo->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?')">Delete</button>
+            </form>
         </div>
     </li>
     @endforeach
 </ol>
 </div>
+</x-app-layout>
