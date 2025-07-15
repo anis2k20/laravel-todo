@@ -11,10 +11,21 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $todos = Todo::all();
-        return view('todos.index', compact('todos'));
+        $status = $request->query('status');
+        $todos = Todo::query();
+
+        if($status === 'completed') {
+            $todos->where('is_completed', true);
+        } elseif($status === 'pending') {
+            $todos->where('is_completed', false);
+        }
+
+        return view('todos.index', [
+            'todos' => $todos->get(),
+            'status' => $status,
+        ]);
     }
 
     /**

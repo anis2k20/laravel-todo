@@ -4,21 +4,32 @@
     <h2>Todo List</h2>
     <div class="flex justify-between">
     <a class="btn" href="{{ route('todos.create') }}">+ Add Todo</a>
-    <button class="btn">All</button>
-    <button class="btn-secondary">Pending</button>
-    <button class="btn">Completed</button>
+    <button class="btn">
+        <a href="{{route('todos.index', ['status'=>'null'])}}">All</a>
+    </button>
+    <button class="btn">
+        <a href="{{route('todos.index', ['status'=>'pending'])}}">Pending</a>
+    </button>
+    <button class="btn">
+        <a href="{{route('todos.index', ['status'=>'completed'])}}">Completed</a>
+    </button>
     </div>
 
 <ol class="space-y-4">
     @foreach ($todos as $todo)
     <li class="card">
+        <div class="flex justify-between items-center">
         <h3 class="card-header">{{$todo->title}}</h3>
+            <span class="status-badge {{ $todo->is_completed ? 'status-completed' : 'status-pending' }}">
+            {{ $todo->is_completed ? 'Completed' : 'Pending' }}</span>
+
+        </div>
         <p class="card-body">{{$todo->description}}</p>
         <div class="card-footer flex justify-between items-center">
             <form action="{{route('todos.complete', $todo->id)}}" method="POST">
                 @csrf
                 @method('PATCH')
-            <button class="btn-secondary">{{$todo->is_completed ? 'Completed':'Pending'}}</button>
+            <button class="btn-secondary">{{$todo->is_completed ? 'Back to Pending':'Done'}}</button>
             </form>
             <button class="btn">
             <a href="{{route('todos.edit', $todo->id)}}">Edit</a>
