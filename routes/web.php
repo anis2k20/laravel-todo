@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
     Route::get('/todos/{todo}', [TodoController::class, 'show'])->name('todos.show');
     Route::put('/todos/{todo}', [TodoController::class, 'update'])->name('todos.update');
+    Route::patch('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todos.complete');
 
     // Route::resource('todos', TodoController::class)->names([
     //     'index'   => 'todo.index',

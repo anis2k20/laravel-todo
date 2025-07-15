@@ -1,24 +1,32 @@
 <x-app-layout>
 
-<div style="width: 400px; margin: 0 auto; border: 1px solid black; padding: 10px;">
+<div class="max-w-[500px] mx-auto mt-10 space-y-4">
     <h2>Todo List</h2>
-    <a href="{{ route('todos.create') }}">+ Add Todo</a>
+    <div class="flex justify-between">
+    <a class="btn" href="{{ route('todos.create') }}">+ Add Todo</a>
+    <button class="btn">All</button>
+    <button class="btn-secondary">Pending</button>
+    <button class="btn">Completed</button>
+    </div>
 
-<ol>
+<ol class="space-y-4">
     @foreach ($todos as $todo)
-    <li style="border: 1px dotted red; margin-bottom: 5px; padding: 5px;">
-        <strong>{{$todo->title}}</strong>
-        <p>{{$todo->description}}</p>
-        <div style="display: flex; justify-content: space-between;">
-            <span>{{$todo->is_completed ? 'Completed':'Pending'}}</span>
-            <button>
-
+    <li class="card">
+        <h3 class="card-header">{{$todo->title}}</h3>
+        <p class="card-body">{{$todo->description}}</p>
+        <div class="card-footer flex justify-between items-center">
+            <form action="{{route('todos.complete', $todo->id)}}" method="POST">
+                @csrf
+                @method('PATCH')
+            <button class="btn-secondary">{{$todo->is_completed ? 'Completed':'Pending'}}</button>
+            </form>
+            <button class="btn">
             <a href="{{route('todos.edit', $todo->id)}}">Edit</a>
             </button>
             <form action="{{ route('todos.destroy', $todo->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?')">Delete</button>
+                <button class="btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this todo?')">Delete</button>
             </form>
         </div>
     </li>

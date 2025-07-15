@@ -75,4 +75,11 @@ class TodoController extends Controller
         $todo->delete();
         return redirect()->back()->with('success', 'Todo deleted successfully.');
     }
+
+    function complete(Todo $todo)
+    {
+        $todo->is_completed = !$todo->is_completed;
+        $todo->save();
+        return redirect()->back()->with('success', 'Todo status updated successfully.');
+    }
 }
