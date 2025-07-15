@@ -1,3 +1,5 @@
+
+<x-app-layout>
 <h2>Edidt Todo</h2>
 
 @if($errors->any())
@@ -27,3 +29,4 @@
         <button type="submit">Update Todo</button>
     </div>
 </form>
+</x-app-layout>

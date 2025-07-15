@@ -1,3 +1,4 @@
+<x-app-layout>
 <div>
    <form action="{{route('todos.store')}}" method="POST">
     @csrf
@@ -17,3 +18,4 @@
     </div>
    </form>
 </div>
+</x-app-layout>

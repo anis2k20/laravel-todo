@@ -12,6 +12,7 @@
         <div style="display: flex; justify-content: space-between;">
             <span>{{$todo->is_completed ? 'Completed':'Pending'}}</span>
             <button>
+            
             <a href="{{route('todos.edit', $todo->id)}}">Edit</a>    
             </button>
             <form action="{{ route('todos.destroy', $todo->id) }}" method="POST">
