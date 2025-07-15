@@ -57,17 +57,22 @@ class TodoController extends Controller
     public function update(StoreTodoRequest $request, Todo $todo)
     {
         $todo->update($request->only('title','description'));
-        
+
         return redirect()->route('todos.index')->with('success', 'todo update successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+//    public function destroy(int $id)
+//    {
+//        $todo = Todo::findOrFail($id);
+//        $todo->delete();
+//        return redirect()->back()->with('success', 'todo delete successfully');
+//    }
     public function destroy(Todo $todo)
     {
-        dd("deleting id", $todo->id);
-        //$todo->delete();
-        //return redirect()->route('todos.index')->with('success', 'todo delete successfully');
+        $todo->delete();
+        return redirect()->back()->with('success', 'Todo deleted successfully.');
     }
 }

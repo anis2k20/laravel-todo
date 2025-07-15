@@ -12,10 +12,10 @@
         <div style="display: flex; justify-content: space-between;">
             <span>{{$todo->is_completed ? 'Completed':'Pending'}}</span>
             <button>
-            
-            <a href="{{route('todos.edit', $todo->id)}}">Edit</a>    
+
+            <a href="{{route('todos.edit', $todo->id)}}">Edit</a>
             </button>
-            <form action="{{ route('todos.destroy', $todo->id) }}" method="POST">
+            <form action="{{ route('todos.destroy', $todo->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?')">Delete</button>
