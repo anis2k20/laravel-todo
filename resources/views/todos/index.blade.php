@@ -1,6 +1,6 @@
 <x-app-layout>
 
-<div class="max-w-[500px] mx-auto mt-10 space-y-4">
+<form action="{{route('todos.index')}}" class="max-w-[500px] mx-auto mt-10 space-y-4">
     <h2>Todo List</h2>
     <div class="flex justify-between">
     <a class="btn" href="{{ route('todos.create') }}">+ Add Todo</a>
@@ -13,6 +13,15 @@
     <button class="btn">
         <a href="{{route('todos.index', ['status'=>'completed'])}}">Completed</a>
     </button>
+    </div>
+    {{--    search box  --}}
+    <div class="flex items-center gap-4">
+        <input type="search"
+               name="search"
+               value="{{request('search')}}"
+               class="form-input"
+               placeholder="Search todos...">
+        <button class="btn-secondary">Search</button>
     </div>
 
 <ol class="space-y-4">
@@ -43,5 +52,5 @@
     </li>
     @endforeach
 </ol>
-</div>
+</form>
 </x-app-layout>

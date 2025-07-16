@@ -14,7 +14,14 @@ class TodoController extends Controller
     public function index(Request $request)
     {
         $status = $request->query('status');
-        $todos = Todo::query();
+        $search = $request->input('search');
+        $todos = Todo::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('title', 'like', '%' . $search . '%');
+            })
+
+            ->get();
+
 
         if($status === 'completed') {
             $todos->where('is_completed', true);
@@ -22,10 +29,7 @@ class TodoController extends Controller
             $todos->where('is_completed', false);
         }
 
-        return view('todos.index', [
-            'todos' => $todos->get(),
-            'status' => $status,
-        ]);
+        return view('todos.index',compact('todos', 'search', 'status'));
     }
 
     /**
