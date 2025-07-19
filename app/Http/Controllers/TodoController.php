@@ -19,15 +19,13 @@ class TodoController extends Controller
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'like', '%' . $search . '%');
             })
-
+            ->when($status === 'completed', function($query){
+                return $query->where('is_completed', true);
+            })
+            ->when($status === 'pending', function($query){
+                return $query->where('is_completed', false);
+            })
             ->get();
-
-
-        if($status === 'completed') {
-            $todos->where('is_completed', true);
-        } elseif($status === 'pending') {
-            $todos->where('is_completed', false);
-        }
 
         return view('todos.index',compact('todos', 'search', 'status'));
     }
