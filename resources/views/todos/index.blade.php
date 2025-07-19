@@ -7,6 +7,9 @@
     <button class="btn">
         <a href="{{route('todos.index', ['status'=>'null'])}}">All</a>
     </button>
+        <button class="btn">
+            <a href="#">Priority</a>
+        </button>
     <button class="btn">
         <a href="{{route('todos.index', ['status'=>'pending'])}}">Pending</a>
     </button>
@@ -33,7 +36,12 @@
             {{ $todo->is_completed ? 'Completed' : 'Pending' }}</span>
 
         </div>
+        <div class="flex justify-between items-start">
+
         <p class="card-body">{{$todo->description}}</p>
+       <span class="status-badge {{$todo->priority === 'high' ? 'status-failed':'status-pending'}}">  {{$todo->priority}}</span>
+        </div>
+
         <div class="card-footer flex justify-between items-center">
             <form action="{{route('todos.complete', $todo->id)}}" method="POST">
                 @csrf

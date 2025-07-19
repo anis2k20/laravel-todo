@@ -11,6 +11,7 @@ class StoreTodoRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'nullable',
+            'priority' => 'nullable|in:low,medium,high',
         ];
     }
 }
