@@ -7,8 +7,10 @@
     <button class="btn">
         <a href="{{route('todos.index', ['status'=>'null'])}}">All</a>
     </button>
-        <button class="btn">
-            <a href="#">Priority</a>
+        <button type="submit" class="btn">
+            <a href="{{ route('todos.index', array_merge(request()->query(), ['sort_by_priority' => 1])) }}">
+                Priority
+            </a>>
         </button>
     <button class="btn">
         <a href="{{route('todos.index', ['status'=>'pending'])}}">Pending</a>

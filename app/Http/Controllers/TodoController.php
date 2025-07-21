@@ -12,6 +12,7 @@ class TodoController extends Controller
     {
         $status = $request->query('status');
         $search = $request->input('search');
+        $sortByPriority = $request->query('sort_by_priority');
         $todos = Todo::query()
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'like', '%' . $search . '%');
@@ -23,8 +24,19 @@ class TodoController extends Controller
                 return $query->where('is_completed', false);
             })
             ->get();
+        if ($sortByPriority) {
+            $priorityOrder = [
+                'high' => 1,
+                'medium' => 2,
+                'low' => 3,
+            ];
+            $todos = $todos->sortBy(function ($todo) use ($priorityOrder) {
+                return $priorityOrder[$todo->priority] ?? 4; // Default to 4 if priority is not set
+            })->values();
+        }
 
-        return view('todos.index',compact('todos', 'search', 'status'));
+
+        return view('todos.index',compact('todos', 'search', 'status', 'sortByPriority'));
     }
 
     /**
