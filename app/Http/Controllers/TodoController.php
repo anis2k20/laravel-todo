@@ -39,9 +39,6 @@ class TodoController extends Controller
         return view('todos.index',compact('todos', 'search', 'status', 'sortByPriority'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('todos.create');
@@ -66,7 +63,7 @@ class TodoController extends Controller
 
     public function update(StoreTodoRequest $request, Todo $todo)
     {
-        $todo->update($request->only('title','description'));
+        $todo->update($request->only('title','description','priority'));
 
         return redirect()->route('todos.index')->with('success', 'todo update successfully');
     }

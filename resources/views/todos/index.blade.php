@@ -1,6 +1,6 @@
 <x-app-layout>
 
-<form action="{{route('todos.index')}}" class="max-w-[500px] mx-auto mt-10 space-y-4">
+<form action="{{route('todos.index')}}" class="max-w-screen-sm mx-auto mt-10 space-y-4">
     <h2>Todo List</h2>
     <div class="flex justify-between">
     <a class="btn" href="{{ route('todos.create') }}">+ Add Todo</a>
@@ -10,7 +10,7 @@
         <button type="submit" class="btn">
             <a href="{{ route('todos.index', array_merge(request()->query(), ['sort_by_priority' => 1])) }}">
                 Priority
-            </a>>
+            </a>
         </button>
     <button class="btn">
         <a href="{{route('todos.index', ['status'=>'pending'])}}">Pending</a>

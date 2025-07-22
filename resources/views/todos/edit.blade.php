@@ -1,32 +1,34 @@
 
 <x-app-layout>
-<h2>Edidt Todo</h2>
+    <div  class="max-w-screen-sm mx-auto mt-10 ">
 
-@if($errors->any())
-<ul>
-    @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-    @endforeach
-    <li></li>
-</ul>
-@endif
-
-<form action="{{route('todos.update', $todo)}}" method="POST">
+<form action="{{route('todos.update', $todo)}}" method="POST" class="space-y-4 bg-white p-10 card rounded-lg">
     @csrf
     @method('PUT')
 
+<h2  class="text-center text-xl font-bold underline">Edit Todo</h2>
     <div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" value="{{ old('title', $todo->title) }}" required>
+        <label class="form-label" for="title">Title:</label>
+        <input class="form-input" type="text" name="title" id="title" value="{{ old('title', $todo->title) }}" required>
     </div>
 
     <div>
-        <label for="description">Description:</label>
-        <textarea name="description" id="description">{{ old('description', $todo->description) }}</textarea>
+        <label class="form-label" for="description">Description:</label>
+        <textarea rows="5" class="form-input" name="description" id="description">{{ old('description', $todo->description) }}</textarea>
     </div>
 
-    <div>
-        <button type="submit">Update Todo</button>
+    <div class="w-full">
+        <label class="form-label" for="priority">Priority</label>
+        <select name="priority" id="priority" class="form-select w-full">
+            <option value="low" {{$todo->priority == 'low' ? 'selected':''}} selected>Low</option>
+            <option value="medium" {{$todo->priority == 'medium' ? 'selected':''}}>Medium</option>
+            <option value="high" {{$todo->priority == 'high' ? 'selected':''}}>High</option>
+        </select>
+    </div>
+
+    <div class="flex justify-end">
+        <button class="btn" type="submit">Update Todo</button>
     </div>
 </form>
+    </div>
 </x-app-layout>
